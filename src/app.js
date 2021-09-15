@@ -1,9 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom"
+import {BrowserRouter, Route} from "react-router-dom"
+import Header from "./components/header";
+import Dashboard from "./components/dashboard";
 
-var template = (
+var routes = (
+    <BrowserRouter>
     <div>
-        <h2>Hellow</h2>
-    </div>
+        <Route path="/" component={Dashboard} exact={true}></Route>
+        <Route path="/create" component={Dashboard}></Route>
+        </div>
+    </BrowserRouter>
 )
-ReactDOM.render(template, document.getElementById('root'))
+ReactDOM.render(routes, document.getElementById('root'))
