@@ -1,15 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom"
-import {BrowserRouter, Route} from "react-router-dom"
-import Header from "./components/header";
-import Dashboard from "./components/dashboard";
+import { createStore } from "redux";
 
-var routes = (
-    <BrowserRouter>
-    <div>
-        <Route path="/" component={Dashboard} exact={true}></Route>
-        <Route path="/create" component={Dashboard}></Route>
-        </div>
-    </BrowserRouter>
-)
-ReactDOM.render(routes, document.getElementById('root'))
+console.log('Jai matta di')
+
+const store = createStore((state = { count: 4 }, action) => {
+    switch (action.type) {
+        case 'INCREMENT':
+            return console.log(state.count);
+        default: return { state };
+    }
+});
+
+const unsubscribe =  store.subscribe(()=>{
+    console.log(store.getState());
+});
+
+store.dispatch({
+    type: 'INCREMENT'
+});
