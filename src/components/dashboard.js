@@ -1,78 +1,32 @@
-import { createStore, combineReducers } from "redux";
-import { v4 } from "uuid";
+// import { createStore, combineReducers } from "redux";
+// import { v4 } from "uuid";
 
-const addExpense = ({description = '', note = '', amount = 0, createAt = 0} = {}) => ({
-    type: 'ADDEXPENSE',
-    expense: {
-    id: v4(),
-    description,
-    note,
-    amount,
-    createAt
-    }
-})
 
-const removeExpense = ({id} = {}) => ({
-    type: 'REMOVEEXPENSE',
-    id
-})
 
-const editExpense = ({id, update} = {}) => ({
-    type: 'EDITEXPENSE',
-    id,
-    update
-})
+// store.subscribe(() => {
+//     const state = store.getState();
+//     const visibleExpenses = getVisibleExpense(state.expenses, state.filters)
+//     console.log(state)
+//     console.log(visibleExpenses)
+// })
 
-const expensesReducerDefaultState = [];
+// console.log("Expenses")
+// const expenseone = store.dispatch(addExpense({description:"Rent", amount:20000}))
+// const expensetwo = store.dispatch(addExpense({description:"Coffee", amount:70}))
+// const expensethree = store.dispatch(addExpense({description:"Headphone", amount:2400}))
 
-const expensesReducer = (state = expensesReducerDefaultState, action) => {
-    switch(action.type) {
-        case "ADDEXPENSE":
-            return [
-                ...state, action.expense
-            ];
-        case "REMOVEEXPENSE":
-            return state.filter(({id})=>{
-                    id !== action.id
-                })
-        case "EDITEXPENSE":
-            return state.map((expense)=>{
-                if(expense.id == action.id) {
-                    return {
-                        ...expense, ...action.updates
-                    }
-                }
-            })          
-        default: {return state;}
-    }
-}
+// // store.dispatch(removeExpense({id: expenseone.expense.id}))
+// // store.dispatch(editExpense({id: expensetwo.expense.id, update: {description: "pizza"}}))
 
-const filtersReducerDefaultState = {
-    text: '',
-    sortBy: 'date',
-    startDate: undefined,
-    endDate: undefined
-};
+// console.log("Filter")
+// // store.dispatch(setTextFilter('rent'))
+// // store.dispatch(setTextFilter('Headphone'))
 
-const filtersReducer = (state = filtersReducerDefaultState, action) => {
-    switch(action.type) {
-        default: {return state;}
-    }
-}
+// store.dispatch(sortByAmount())
+// store.dispatch(sortByDate())
 
-const store = createStore(combineReducers({
-    expenses: expensesReducer,
-    filters: filtersReducer
-}))
-
-store.subscribe(() => {
-    console.log(store.getState())
-})
-
-const expenseone = store.dispatch(addExpense({description:"Rent", amount:20000}))
-const expensetwo = store.dispatch(addExpense({description:"Coffee", amount:70}))
-store.dispatch(editExpense(expenseone.expense.id, {amout: 500}))
-
-store.dispatch(removeExpense({id: expensetwo.expense.id}))
+// // store.dispatch(setStartDate(-125))
+// // store.dispatch(setStartDate())
+// // store.dispatch(setEndDate(125))
 
 
