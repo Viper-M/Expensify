@@ -6,9 +6,9 @@ export default (expenses, {text, sortBy, startDate, endDate}) => {
         return startDateMatch && endDateMatch && textMatch;
     }).sort((a,b) => {
         if(sortBy === 'date') {
-            return a.createdAt < b.createdAt ? 1 : -1;
+            return a.createdAt - b.createdAt;
         } else if(sortBy === 'amount') {
-            return a.amount < b.amount ? 1 : -1;
+            return a.amount - b.amount;
         }
     })
 }

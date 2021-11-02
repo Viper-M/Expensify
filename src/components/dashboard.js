@@ -1,32 +1,24 @@
-// import { createStore, combineReducers } from "redux";
-// import { v4 } from "uuid";
+import React from "react";
+import { connect } from "react-redux";
+import { setTextFilter } from "../actions/filters";
+
+const Dashboard = (props) => {
+    return (
+        <div>
+            <h1>Expensify</h1>
+            <input value={props.filters.text} onChange={(e)=>{
+                props.dispatch(setTextFilter(e.target.value))
+            }}/>
+            <h2>{props.expenses}</h2>
+            <h2>{props.filters}</h2>
+        </div>
+    );
+}
 
 
-
-// store.subscribe(() => {
-//     const state = store.getState();
-//     const visibleExpenses = getVisibleExpense(state.expenses, state.filters)
-//     console.log(state)
-//     console.log(visibleExpenses)
-// })
-
-// console.log("Expenses")
-// const expenseone = store.dispatch(addExpense({description:"Rent", amount:20000}))
-// const expensetwo = store.dispatch(addExpense({description:"Coffee", amount:70}))
-// const expensethree = store.dispatch(addExpense({description:"Headphone", amount:2400}))
-
-// // store.dispatch(removeExpense({id: expenseone.expense.id}))
-// // store.dispatch(editExpense({id: expensetwo.expense.id, update: {description: "pizza"}}))
-
-// console.log("Filter")
-// // store.dispatch(setTextFilter('rent'))
-// // store.dispatch(setTextFilter('Headphone'))
-
-// store.dispatch(sortByAmount())
-// store.dispatch(sortByDate())
-
-// // store.dispatch(setStartDate(-125))
-// // store.dispatch(setStartDate())
-// // store.dispatch(setEndDate(125))
-
-
+export default connect((state) => {
+    return {
+    expenses: state.expenses.length,
+    filters: state.filters.text
+    }
+})(Dashboard)
